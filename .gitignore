@@ -4,3 +4,22 @@
 *.jar
 *.war
 *.ear
+*.log
+
+# Eclipse files #
+.classpath
+.project
+
+.DS_Store
+.springBeans
+.settings
+
+
+**/target
+
+application.development.properties
+/target
+
+/bin
+
+#*.sh
