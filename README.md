@@ -15,7 +15,7 @@ Spring RSF 是基于 RESTEasy & Spring 构建的 RESTful 风格、轻量级 RPC 
 ## Quick Start
 
 
-##### 服务提供者
+#### 服务提供者
 
 __1. 加入工程依赖__
 
@@ -23,7 +23,6 @@ __1. 加入工程依赖__
 <dependency>
 	<groupId>org.springcn.rsf</groupId>
 	<artifactId>spring-rsf</artifactId>
-	<packaging>jar</packaging>
 	<version>1.0.1</version>
 <dependency>
 ```
@@ -93,7 +92,7 @@ public interface ProductService {
 
 *该接口一般以 jar 包形式发布给调用者。*
 
-##### 调用者
+#### 服务调用者
 
 __1. 添加依赖__
 
@@ -102,12 +101,14 @@ __1. 添加依赖__
 
 __2. 将服务接口注入__
 
-将如下配置添加至 Spring 配置文件中，以 Bean 方式注入。
+将如下配置添加至 Spring 配置文件 `applicationContext-rpc-test.xml`，以 Bean 方式注入。
  
 ```xml
 <bean id="productService" class="org.springcn.rsf.proxy.RSFClientFactoryBean">
-	<!-- 指定服务接口 -->
-	<property name="serviceInterface" value="org.springcn.rsf.example.rpc.ProductService" />
+    <!-- 指定业务服务接口 -->
+    <property name="serviceInterface" value="org.springcn.rsf.example.rpc.ProductService" />
+    
+    <!-- HTTP Clinet 参数设置-->
     <property name="connectionTimeout" value="5000" />
     <property name="readTimeout" value="5000" />
     <property name="maxTotalConnections" value="30" />
@@ -121,13 +122,13 @@ __2. 将服务接口注入__
     	<list>
         	<value>127.0.0.1:8080</value>
         </list>
-	</property>
+    </property>
 </bean>
 ```
 
 __3.调用产品服务__
 
-```
+```java
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext-rpc-test.xml")
