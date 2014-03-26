@@ -3,11 +3,11 @@ package org.springcn.rsf.proxy;
 import java.util.List;
 
 import org.jboss.resteasy.client.ClientExecutor;
+import org.jboss.resteasy.client.core.executors.ApacheHttpClient4Executor;
 import org.jboss.resteasy.plugins.providers.RegisterBuiltin;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
 import org.springcn.rsf.RSFServersProvider;
 import org.springcn.rsf.http.HttpClientBuilder;
-import org.springcn.rsf.http.RetryHttpClientExecutor;
 import org.springcn.rsf.jackson.JacksonContextResolver;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -42,14 +42,13 @@ public class RSFClientFactoryBean<T> implements FactoryBean<T>, InitializingBean
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		// 设置带重试机制的 Executor
-		ClientExecutor clientExecutor = new RetryHttpClientExecutor(
+		ClientExecutor clientExecutor = new ApacheHttpClient4Executor(
 				new HttpClientBuilder()
 						.setConnectionTimeout(connectionTimeout)
 						.setReadTimeout(readTimeout)
 						.setMaxTotalConnections(maxTotalConnections)
 						.setDefaultMaxPerRoute(defaultMaxConnectionsPerHost)
-						.build(), retry);
+						.build());
 
 		ResteasyProviderFactory	resteasyProviderFactory = ResteasyProviderFactory.getInstance();
 		resteasyProviderFactory.register(JacksonContextResolver.class);
@@ -57,7 +56,7 @@ public class RSFClientFactoryBean<T> implements FactoryBean<T>, InitializingBean
 
 		// 支持路由的代理类
 		client = RouteProxy.create(serviceInterface, createRSFServersProvider(),
-				clientExecutor, resteasyProviderFactory);
+				clientExecutor, resteasyProviderFactory, retry);
 	}
 
 	/*
