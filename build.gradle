@@ -1,0 +1,56 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'eclipse'
+
+group = "org.springcn"
+version = "1.0.1"
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'spring-rsf', 'Implementation-Version': version
+    }
+}
+
+sourceCompatibility = 1.6
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+repositories {
+    maven {
+        url "http://repo.springsource.org/release"
+        url "http://repository.jboss.org/maven2"
+    }
+    mavenCentral()
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            mavenLocal()
+        }
+    }
+}
+
+configurations {
+    provided
+}
+
+sourceSets {
+    main.compileClasspath += configurations.provided
+    test.compileClasspath += configurations.provided
+    test.runtimeClasspath += configurations.provided
+}
+
+dependencies {
+    testCompile "junit:junit:4.7"
+    compile "org.jboss.resteasy:resteasy-jaxrs:3.0.1.Final"
+    compile "org.jboss.resteasy:resteasy-jackson-provider:3.0.1.Final"
+    compile "org.jboss.resteasy:resteasy-spring:3.0.1.Final"
+    compile "org.apache.httpcomponents:httpclient:4.2.5"
+    compile "net.sf.scannotation:scannotation:1.0.2"
+
+    provided "org.springframework:spring-core:3.0.5.RELEASE"
+    provided "org.springframework:spring-context:3.0.5.RELEASE"
+    provided "org.springframework:spring-web:3.0.5.RELEASE"
+    provided "log4j:log4j:1.2.9"
+}
+
+eclipse.classpath.plusConfigurations += configurations.provided
