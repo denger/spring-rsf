@@ -1,5 +1,6 @@
 package org.springcn.rsf.example.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springcn.rsf.example.dto.Product;
@@ -15,19 +16,29 @@ public class ProductServiceImpl implements ProductService{
 
 	public Product get(Long id) {
 		Product product = new Product();
+		product.setName("iPad 32G");
+		product.setId(id);
+		product.setDesc("Design by Apple!");
+
 		return product;
 	}
 
 	public boolean delete(Long id) {
-		return false;
+		// do something 
+		return true;
 	}
 
 	public Product create(Product product) {
-		return null;
+		product.setId(1L);
+		return product;
 	}
 
 	public List<Product> findByCategory(String category) {
-		return null;
+		List<Product> products = new ArrayList<Product>();
+		products.add(get(1L));
+		products.add(get(2L));
+		products.add(get(3L));
+		return products;
 	}
 
 }
