@@ -10,6 +10,7 @@ Spring RSF 是基于 RESTEasy & Spring 构建的 RESTful 风格、轻量级 RPC 
 
 客户端对多 Server 提供负载均衡机制，可轻松实现自定义的路由策略(目前支持随机和轮询)。当集群远程服务器不可用时支持重试机制，动态监测和管理 Server 列表。能实时从远程获取及更新 Server 列表。
 
+**你可以通过下载 [示例代码](https://github.com/denger/spring-rsf/tree/master/samples/HelloSpringRSF) 或下面的说明来快速了解该框架的使用。**
 
 
 ## Quick Start
@@ -71,22 +72,20 @@ __3.编写业务服务接口__
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public interface ProductService {
- 
-    /**
-     * 创建产品对象 
-     * @param productDto
-     * @return
-     */
-    @POST
-    ProductDto createProduct(ProductDto productDto) ;
 
-    /**
-     * 查询所有产品
-     * @return
-     */
-    @GET
-    @Path("list")
-    List<ProductDto> listProducts();
+	@GET
+	@Path("/{id}")
+	public Product get(@PathParam("id") Long id);
+
+	@DELETE
+	@Path("/{id}")
+	public boolean delete(@PathParam("id") Long id);
+
+	@PUT
+	public Product create(Product product);
+
+	@GET
+	public List<Product> findByCategory(@QueryParam("category") String category);
 }
 ```
 
