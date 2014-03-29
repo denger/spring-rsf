@@ -13,10 +13,10 @@
 ```
    *NOTE: spring-rsf will install its artifacts to the Maven Local Repository, which is ~/.m2/repostory in default*
 
-* start web service at 8080 port
+* start web service at 80 port
 
 ```
-  $ cd smaples/HelloSpringRSF
+  $ cd smaples
   $ gradle jettyRun
 ```
 
