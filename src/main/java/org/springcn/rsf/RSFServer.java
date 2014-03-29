@@ -12,6 +12,7 @@ import java.net.URI;
 public class RSFServer {
 
 	private String server;
+	private int weight;
 
 	public RSFServer(){}
 	
@@ -21,6 +22,14 @@ public class RSFServer {
 
 	public void setServer(String server) {
 		this.server = server;
+	}
+
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
+
+	public int getWeight() {
+		return weight;
 	}
 
 	public String getServer() {
