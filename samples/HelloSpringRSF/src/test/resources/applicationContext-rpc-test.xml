@@ -1,0 +1,26 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd ">
+
+	<bean id="productService" class="org.springcn.rsf.proxy.RSFClientFactoryBean">
+		<!-- 指定业务服务接口 -->
+		<property name="serviceInterface" value="org.springcn.rsf.example.rpc.ProductService" />
+
+		<!-- HTTP Clinet 参数设置 -->
+		<property name="connectionTimeout" value="5000" />
+		<property name="readTimeout" value="5000" />
+		<property name="maxTotalConnections" value="30" />
+		<property name="defaultMaxConnectionsPerHost" value="20" />
+
+		<!-- 重试次数 -->
+		<property name="retry" value="1" />
+
+		<!-- 服务列表(ip:port/context-root) -->
+		<property name="serverList">
+			<list>
+				<value>127.0.0.1:8080/HelloSpringRSF</value>
+			</list>
+		</property>
+	</bean>
+</beans>

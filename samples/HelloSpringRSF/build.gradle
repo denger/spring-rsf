@@ -1,0 +1,25 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'jetty'
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.springcn:spring-rsf:1.0.1"
+    compile "junit:junit:4.11"
+    compile "net.sf.scannotation:scannotation:1.0.2"
+    compile "org.springframework:spring-core:3.0.5.RELEASE"
+	compile "org.springframework:spring-context:3.0.5.RELEASE"
+	compile "org.springframework:spring-web:3.0.5.RELEASE"
+	compile "org.springframework:spring-test:3.0.5.RELEASE"
+
+	compile "log4j:log4j:1.2.14"
+	compile "org.slf4j:slf4j-api:1.7.5"
+	compile "javax.servlet:servlet-api:2.5"
+}
