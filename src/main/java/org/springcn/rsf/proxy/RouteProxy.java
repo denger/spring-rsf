@@ -60,7 +60,7 @@ public class RouteProxy<T> implements InvocationHandler{
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		for(int i = 0; i < retries + 1; i++){
 			try{
-				invokeProxyServiceMethod(proxy, method, args);
+				return invokeProxyServiceMethod(proxy, method, args);
 
 			}catch(Exception e){
 				handleHttpRetryException(i, e);
