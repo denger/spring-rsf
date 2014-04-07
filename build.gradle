@@ -16,7 +16,7 @@ sourceCompatibility = 1.6
 repositories {
     maven {
         url "http://repo.springsource.org/release"
-        url "http://repository.jboss.org/maven2"
+        url "http://mvnrepository.com"
     }
     mavenCentral()
 }
