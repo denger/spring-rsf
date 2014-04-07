@@ -6,9 +6,12 @@ import org.jboss.resteasy.client.ClientExecutor;
 import org.jboss.resteasy.client.core.executors.ApacheHttpClient4Executor;
 import org.jboss.resteasy.plugins.providers.RegisterBuiltin;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
+import org.springcn.rsf.AbstractRSFServersProvider;
+import org.springcn.rsf.BaseRSFServersProvider;
 import org.springcn.rsf.RSFServersProvider;
 import org.springcn.rsf.http.HttpClientBuilder;
 import org.springcn.rsf.jackson.JacksonContextResolver;
+import org.springcn.rsf.loadbalancer.LoadBalancerFactory;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -38,6 +41,8 @@ public class RSFClientFactoryBean<T> implements FactoryBean<T>, InitializingBean
 
 	private List<String> serverList;
 
+	private String loadBalancer;
+
 	private T client;
 
 	@Override
@@ -65,7 +70,11 @@ public class RSFClientFactoryBean<T> implements FactoryBean<T>, InitializingBean
 	private RSFServersProvider createRSFServersProvider() {
 		// 本地配置文件中的 server list 配置
 		if(serverList != null && serverList.size() > 0){
-			return RSFServersProvider.createProviderByLocalList(serverList);
+			AbstractRSFServersProvider provider = new BaseRSFServersProvider(serverList);
+			provider.setLoadBalancerRule(LoadBalancerFactory
+					.createRule(loadBalancer));
+
+			return provider;
 		}
 		throw new RuntimeException("Can't init RSF Services, Not fond any server list!");
 	}
@@ -108,8 +117,16 @@ public class RSFClientFactoryBean<T> implements FactoryBean<T>, InitializingBean
 	public void setRetry(int retry) {
 		this.retry = retry;
 	}
-
+	
 	public void setServiceInterface(Class<T> serviceInterface) {
 		this.serviceInterface = serviceInterface;
+	}
+	
+	public void setLoadBalancer(String loadBalancer) {
+		this.loadBalancer = loadBalancer;
+	}
+
+	public String getLoadBalancer() {
+		return loadBalancer;
 	}
 }

@@ -60,7 +60,7 @@ public class RouteProxy<T> implements InvocationHandler{
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		for(int i = 0; i < retries + 1; i++){
 			try{
-				invokeProxyServiceMethod(proxy, method, args);
+				return invokeProxyServiceMethod(proxy, method, args);
 
 			}catch(Exception e){
 				handleHttpRetryException(i, e);
@@ -71,7 +71,7 @@ public class RouteProxy<T> implements InvocationHandler{
 
 	public Object invokeProxyServiceMethod(Object proxy, Method method, Object[] args) throws IllegalAccessException, 
 		IllegalArgumentException, InvocationTargetException  {
-		RSFServer server = serverProvider.applyServerByRandom();
+		RSFServer server = serverProvider.chooseServer();
 		T proxyService = cacheServices.get(server.getServer());
 		if (proxyService == null) {
 			synchronized (cacheServices) {

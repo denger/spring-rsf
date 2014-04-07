@@ -1,47 +1,37 @@
 package org.springcn.rsf;
 
 import java.util.List;
-import java.util.Random;
-
-import org.springcn.rsf.conf.DefaultRSFServersProvider;
-
-
 
 /**
- * RSFServersProvider class. 用于获取 RESTful Server 列表, 由相应的子类来实现列表获取来源.
+ * RSFServersProvider class. 用于获取 RESTful Server 列表, 由相应的实现来获取 Server List 来源。
  * 
  * @author denger
  */
-public abstract class RSFServersProvider {
+public interface RSFServersProvider {
 
 	/**
-     * 随机种子
-     */
-    private static Random random = new Random(System.currentTimeMillis());
-
-    /**
-     * 根据服务器列表创建 Servers 提供者.
-     * @param serverList
-     * @return
-     */
-	public static RSFServersProvider createProviderByLocalList(List<String> serverList){
-		return new DefaultRSFServersProvider(serverList);
-	}
-
-	/**
-	 * 获取服务列表, 获取来源由相应的子类实现.
+	 * 获取所有 Servers 服务列表(包括不可用服务)。
 	 */
-	public abstract List<RSFServer> getServers();
+	public List<RSFServer> getServerList();
 
-	// TODO 简单版本随机选择服务器
-	public RSFServer applyServerByRandom() {
-		List<RSFServer> servers = getServers();
+	/**
+	 * 选择并获取一个可用的服务。
+	 * 
+	 * @return 返回可用服务实例，无可用实现则返回 Null.
+	 */
+	public RSFServer chooseServer();
 
-		int size = servers.size();
-		if (size <= 0) {
-			throw new RuntimeException("Not found any server!");
-		}
-		int index = random.nextInt(size);
-		return servers.get(index); 
-	}
+	/**
+	 * 添加新的服务列表。
+	 * 
+	 * @param newServers 新服务列表
+	 */
+	public void addServers(List<RSFServer> newServers);
+
+	/**
+	 * 将指定 Server 从可用列表中移除。
+	 * 
+	 * @param server 服务实例
+	 */
+	public void markServerDown(RSFServer server);
 }
