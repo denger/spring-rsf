@@ -12,9 +12,9 @@
 		<property name="readTimeout" value="5000" />
 		<property name="maxTotalConnections" value="30" />
 		<property name="defaultMaxConnectionsPerHost" value="20" />
-
-		<!-- 重试次数 -->
-		<property name="retry" value="1" />
+		
+		<!-- 负载均衡器: random(随机)/roundRobin(轮询) -->
+		<property name="loadBalancer" value="random" />
 
 		<!-- 服务列表(ip:port/context-root) -->
 		<property name="serverList">
