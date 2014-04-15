@@ -1,4 +1,4 @@
-package org.springcn.rsf.jackson;
+package org.springcn.rsf.serialization;
 
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;

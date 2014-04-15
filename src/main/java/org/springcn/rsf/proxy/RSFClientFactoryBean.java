@@ -10,8 +10,8 @@ import org.springcn.rsf.AbstractRSFServersProvider;
 import org.springcn.rsf.BaseRSFServersProvider;
 import org.springcn.rsf.RSFServersProvider;
 import org.springcn.rsf.http.HttpClientBuilder;
-import org.springcn.rsf.jackson.JacksonContextResolver;
 import org.springcn.rsf.loadbalancer.LoadBalancerFactory;
+import org.springcn.rsf.serialization.JacksonContextResolver;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -19,7 +19,7 @@ import org.springframework.beans.factory.InitializingBean;
 /**
  * 
  * RESTful Client Factory Bean.
- * @author dengfeige
+ * @author denger
  *
  * @param <T>
  */
