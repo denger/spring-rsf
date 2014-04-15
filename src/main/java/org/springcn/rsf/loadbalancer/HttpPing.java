@@ -15,6 +15,7 @@ import org.springcn.rsf.RSFServer;
  */
 public class HttpPing {
 
+	private static int DEFAULT_PING_TIMEOUT = 1000;
 
 	/**
 	 * RSFServer health check.
@@ -28,6 +29,8 @@ public class HttpPing {
 			HttpURLConnection.setFollowRedirects(false);
 			HttpURLConnection con = (HttpURLConnection) new URL(String.valueOf(server.getURI()))
 					.openConnection();
+			con.setUseCaches(false);
+			con.setReadTimeout(DEFAULT_PING_TIMEOUT);
 			con.setRequestMethod("HEAD");
 			return isAlive(con.getResponseCode());
 		} catch (Exception e) {
