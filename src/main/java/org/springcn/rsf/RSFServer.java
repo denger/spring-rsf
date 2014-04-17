@@ -13,6 +13,7 @@ public class RSFServer {
 
 	private String server;
 	private int weight;
+	public boolean isAlive;
 
 	public RSFServer(){}
 	
@@ -50,5 +51,13 @@ public class RSFServer {
 
 	public boolean equals(RSFServer rsfResource) {
 		return server.equals(rsfResource.server);
+	}
+
+	public void setAlive(boolean isAlive) {
+		this.isAlive = isAlive;
+	}
+
+	public boolean isAlive() {
+		return isAlive;
 	}
 }

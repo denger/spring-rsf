@@ -28,7 +28,7 @@ public class LoadBalancerFactory {
 	}
 
 	/**
-	 * LoadBalancer Rules Definded.
+	 * LoadBalancer Rules.
 	 */
 	public static enum LoadBalancerRule {
 		Random(RandomRule.class), 

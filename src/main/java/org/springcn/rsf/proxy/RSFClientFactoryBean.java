@@ -6,8 +6,8 @@ import org.jboss.resteasy.client.ClientExecutor;
 import org.jboss.resteasy.client.core.executors.ApacheHttpClient4Executor;
 import org.jboss.resteasy.plugins.providers.RegisterBuiltin;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
-import org.springcn.rsf.AbstractRSFServersProvider;
 import org.springcn.rsf.BaseRSFServersProvider;
+import org.springcn.rsf.LocalRSFServersProvider;
 import org.springcn.rsf.RSFServersProvider;
 import org.springcn.rsf.http.HttpClientBuilder;
 import org.springcn.rsf.loadbalancer.LoadBalancerFactory;
@@ -70,7 +70,7 @@ public class RSFClientFactoryBean<T> implements FactoryBean<T>, InitializingBean
 	private RSFServersProvider createRSFServersProvider() {
 		// 本地配置文件中的 server list 配置
 		if(serverList != null && serverList.size() > 0){
-			AbstractRSFServersProvider provider = new BaseRSFServersProvider(serverList);
+			BaseRSFServersProvider provider = new LocalRSFServersProvider(serverList);
 			provider.setLoadBalancerRule(LoadBalancerFactory
 					.createRule(loadBalancer));
 
