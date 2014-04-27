@@ -3,9 +3,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd ">
 
-	<bean id="productService" class="org.springcn.rsf.proxy.RSFClientFactoryBean">
+	<bean id="productService" class="org.springstack.rsf.proxy.RSFClientFactoryBean">
 		<!-- 指定业务服务接口 -->
-		<property name="serviceInterface" value="org.springcn.rsf.example.rpc.ProductService" />
+		<property name="serviceInterface" value="org.springstack.rsf.example.rpc.ProductService" />
 
 		<!-- HTTP Clinet 参数设置 -->
 		<property name="connectionTimeout" value="5000" />

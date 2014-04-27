@@ -22,7 +22,7 @@ __1. 加入工程依赖__
 
 ```xml
 <dependency>
-	<groupId>org.springcn.rsf</groupId>
+	<groupId>org.springstack.rsf</groupId>
 	<artifactId>spring-rsf</artifactId>
 	<version>1.0.1</version>
 <dependency>
@@ -106,7 +106,7 @@ public class ProductServiceImpl implements ProductService{
 
 添加实现至 Spring 配置 `applicationContext.xml`，当然也可以注解(@Service)的方式声明该服务实现。
 ```xml
-<bean class="org.springcn.rsf.example.service.ProductServiceImpl">
+<bean class="org.springstack.rsf.example.service.ProductServiceImpl">
 </bean>
 ```
 
@@ -124,9 +124,9 @@ __2. 将服务接口注入__
 将如下配置添加至 Spring 配置文件 `applicationContext-rpc-test.xml`，将 `PorudctService` 通过 Spring 以 Bean 方式注入。
  
 ```xml
-<bean id="productService" class="org.springcn.rsf.proxy.RSFClientFactoryBean">
+<bean id="productService" class="org.springstack.rsf.proxy.RSFClientFactoryBean">
     <!-- 指定业务服务接口 -->
-    <property name="serviceInterface" value="org.springcn.rsf.example.rpc.ProductService" />
+    <property name="serviceInterface" value="org.springstack.rsf.example.rpc.ProductService" />
     
     <!-- HTTP Clinet 参数设置-->
     <property name="connectionTimeout" value="5000" />

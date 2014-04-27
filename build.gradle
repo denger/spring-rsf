@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'eclipse'
 
-group = "org.springcn"
+group = "org.springstack"
 version = "1.0.1"
 jar {
     manifest {

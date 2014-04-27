@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    compile "org.springcn:spring-rsf:1.0.1"
+    compile "org.springstack:spring-rsf:1.0.1"
     compile "junit:junit:4.11"
     compile "net.sf.scannotation:scannotation:1.0.2"
     compile "org.springframework:spring-core:3.0.5.RELEASE"

@@ -4,5 +4,5 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd ">
 
-	<bean class="org.springcn.rsf.example.service.ProductServiceImpl" />
+	<bean class="org.springstack.rsf.example.service.ProductServiceImpl" />
 </beans>
