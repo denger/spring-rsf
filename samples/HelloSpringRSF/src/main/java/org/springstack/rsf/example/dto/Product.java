@@ -7,34 +7,34 @@ package org.springstack.rsf.example.dto;
  */
 public class Product {
 
-	private String name;
+    private String name;
 
-	private Long id;
+    private Long id;
 
-	private String desc;
+    private String desc;
 
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 
-	public String getDesc() {
-		return desc;
-	}
+    public String getDesc() {
+        return desc;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
 }

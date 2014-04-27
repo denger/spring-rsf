@@ -25,17 +25,17 @@ import org.springstack.rsf.example.dto.Product;
 @Consumes(MediaType.APPLICATION_JSON)
 public interface ProductService {
 
-	@GET
-	@Path("/{id}")
-	public Product get(@PathParam("id") Long id);
+    @GET
+    @Path("/{id}")
+    public Product get(@PathParam("id") Long id);
 
-	@DELETE
-	@Path("/{id}")
-	public boolean delete(@PathParam("id") Long id);
+    @DELETE
+    @Path("/{id}")
+    public boolean delete(@PathParam("id") Long id);
 
-	@PUT
-	public Product create(Product product);
+    @PUT
+    public Product create(Product product);
 
-	@GET
-	public List<Product> findByCategory(@QueryParam("category") String category);
+    @GET
+    public List<Product> findByCategory(@QueryParam("category") String category);
 }

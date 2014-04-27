@@ -15,31 +15,31 @@ import org.springstack.rsf.RSFServer;
  */
 public class HttpPing {
 
-	private static int DEFAULT_PING_TIMEOUT = 1000;
+    private static int DEFAULT_PING_TIMEOUT = 1000;
 
-	/**
-	 * RSFServer health check.
-	 * 
-	 * @param server RSFServer Instance.
-	 */
-	public boolean isAlive(RSFServer server) {
-		try {
-			HttpURLConnection.setFollowRedirects(false);
-			// note : you may also need
-			HttpURLConnection.setFollowRedirects(false);
-			HttpURLConnection con = (HttpURLConnection) new URL(String.valueOf(server.getURI()))
-					.openConnection();
-			con.setUseCaches(false);
-			con.setReadTimeout(DEFAULT_PING_TIMEOUT);
-			con.setRequestMethod("HEAD");
-			return isAlive(con.getResponseCode());
-		} catch (Exception e) {
-			return false;
-		}
-	}
+    /**
+     * RSFServer health check.
+     * 
+     * @param server RSFServer Instance.
+     */
+    public boolean isAlive(RSFServer server) {
+        try {
+            HttpURLConnection.setFollowRedirects(false);
+            // note : you may also need
+            HttpURLConnection.setFollowRedirects(false);
+            HttpURLConnection con = (HttpURLConnection) new URL(String.valueOf(server.getURI()))
+                    .openConnection();
+            con.setUseCaches(false);
+            con.setReadTimeout(DEFAULT_PING_TIMEOUT);
+            con.setRequestMethod("HEAD");
+            return isAlive(con.getResponseCode());
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
-	private boolean isAlive(int responseCode) {
-		return (responseCode >= HttpURLConnection.HTTP_OK && responseCode < HttpURLConnection.HTTP_BAD_REQUEST);
-	}
+    private boolean isAlive(int responseCode) {
+        return (responseCode >= HttpURLConnection.HTTP_OK && responseCode < HttpURLConnection.HTTP_BAD_REQUEST);
+    }
 
 }

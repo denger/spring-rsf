@@ -9,58 +9,58 @@ package org.springstack.rsf.loadbalancer;
  * 
  */
 public class LoadBalancerFactory {
-	
-	private static LoadBalancerRule DEFAULT_RULE = LoadBalancerRule.Random;
+    
+    private static LoadBalancerRule DEFAULT_RULE = LoadBalancerRule.Random;
 
-	/**
-	 * Create Rule by Name.
-	 * 
-	 * @param ruleName LoadBalancerRule enum
-	 * @return
-	 * @see LoadBalancerRule
-	 */
-	public static AbstractLoadBalancerRule createRule(String ruleName) {
-		LoadBalancerRule balancerRule = LoadBalancerRule.getRule(ruleName);
-		if(balancerRule == null){
-			balancerRule = DEFAULT_RULE;
-		}
-		return balancerRule.getInstace();
-	}
+    /**
+     * Create Rule by Name.
+     * 
+     * @param ruleName LoadBalancerRule enum
+     * @return
+     * @see LoadBalancerRule
+     */
+    public static AbstractLoadBalancerRule createRule(String ruleName) {
+        LoadBalancerRule balancerRule = LoadBalancerRule.getRule(ruleName);
+        if(balancerRule == null){
+            balancerRule = DEFAULT_RULE;
+        }
+        return balancerRule.getInstace();
+    }
 
-	/**
-	 * LoadBalancer Rules.
-	 */
-	public static enum LoadBalancerRule {
-		Random(RandomRule.class), 
-		RoundRobin(RandomRule.class);
+    /**
+     * LoadBalancer Rules.
+     */
+    public static enum LoadBalancerRule {
+        Random(RandomRule.class), 
+        RoundRobin(RandomRule.class);
 
-		public static LoadBalancerRule getRule(String name) {
-			if (name == null || name.length() <= 0) {
-				return null;
-			}
-			LoadBalancerRule[] rules = LoadBalancerRule.values();
-			for (LoadBalancerRule rule : rules) {
-				if (String.valueOf(rule).equalsIgnoreCase(name)) {
-					return rule;
-				}
-			}
-			return null;
-		}
+        public static LoadBalancerRule getRule(String name) {
+            if (name == null || name.length() <= 0) {
+                return null;
+            }
+            LoadBalancerRule[] rules = LoadBalancerRule.values();
+            for (LoadBalancerRule rule : rules) {
+                if (String.valueOf(rule).equalsIgnoreCase(name)) {
+                    return rule;
+                }
+            }
+            return null;
+        }
 
-		Class<? extends AbstractLoadBalancerRule> ruleClassz;
+        Class<? extends AbstractLoadBalancerRule> ruleClassz;
 
-		private LoadBalancerRule(Class<? extends AbstractLoadBalancerRule> clasz) {
-			this.ruleClassz = clasz;
-		}
+        private LoadBalancerRule(Class<? extends AbstractLoadBalancerRule> clasz) {
+            this.ruleClassz = clasz;
+        }
 
-		public AbstractLoadBalancerRule getInstace() {
-			try {
-				return this.ruleClassz.newInstance();
-			} catch (Exception e) {
-				return null;
-			}
-		}
-		
-	}
+        public AbstractLoadBalancerRule getInstace() {
+            try {
+                return this.ruleClassz.newInstance();
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        
+    }
 
 }

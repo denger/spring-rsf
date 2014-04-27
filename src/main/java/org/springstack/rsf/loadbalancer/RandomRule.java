@@ -15,41 +15,41 @@ import org.springstack.rsf.RSFServersProvider;
  */
 public class RandomRule extends AbstractLoadBalancerRule {
 
-	private Random random;
+    private Random random;
 
-	public RandomRule() {
-		random = new Random();
-	}
+    public RandomRule() {
+        random = new Random();
+    }
 
-	public RSFServer choose(RSFServersProvider provider){
-		if(provider == null){
-			return null;
-		}
-		RSFServer server = null;
-		List<RSFServer> serverList = provider.getServerList();
+    public RSFServer choose(RSFServersProvider provider){
+        if(provider == null){
+            return null;
+        }
+        RSFServer server = null;
+        List<RSFServer> serverList = provider.getServerList();
 
-		// FIXME 循环意义不大，应该增加服务可用状态判断，并设置重试获取次数
-		while(server == null){
-			if(Thread.interrupted()){
-				return null;
-			}
+        // FIXME 循环意义不大，应该增加服务可用状态判断，并设置重试获取次数
+        while(server == null){
+            if(Thread.interrupted()){
+                return null;
+            }
             if(serverList == null || serverList.size() == 0){
-            	/**
-            	 * No servers. 
-            	 */
-            	return null;
+                /**
+                 * No servers. 
+                 */
+                return null;
             }
             int index = random.nextInt(serverList.size());
             server = serverList.get(index);
             if(server == null || !server.isAlive()){
-            	continue;
+                continue;
             }
-		}
-		return server;
-	}
+        }
+        return server;
+    }
 
-	@Override
-	public RSFServer choose() {
-		return choose(getRSFServersProvider());
-	}
+    @Override
+    public RSFServer choose() {
+        return choose(getRSFServersProvider());
+    }
 }

@@ -19,43 +19,43 @@ public abstract class BaseRSFServersProvider implements RSFServersProvider{
 
     private final static RoundRobinRule DEFAULT_RULE = new RoundRobinRule();
 
-	protected AbstractLoadBalancerRule loadBalancerRule;
+    protected AbstractLoadBalancerRule loadBalancerRule;
 
     /**
-	 * 设置默认的 loadBalancer 访问规则实现.
-	 * 
-	 * @param loadBalancerRule
-	 */
-	public BaseRSFServersProvider() {
-		this.loadBalancerRule = DEFAULT_RULE; // 默认基于轮询访问策略
-		this.loadBalancerRule.setRSFServersProvider(this);
-	}
+     * 设置默认的 loadBalancer 访问规则实现.
+     * 
+     * @param loadBalancerRule
+     */
+    public BaseRSFServersProvider() {
+        this.loadBalancerRule = DEFAULT_RULE; // 默认基于轮询访问策略
+        this.loadBalancerRule.setRSFServersProvider(this);
+    }
 
-	/**
-	 * 设置指定 load balancer 实现策略.
-	 * 
-	 * @param loadBalancerRule
-	 */
-	public void setLoadBalancerRule(AbstractLoadBalancerRule loadBalancerRule) {
-		this.loadBalancerRule = loadBalancerRule;
-		if (loadBalancerRule.getRSFServersProvider() != this) {
-			loadBalancerRule.setRSFServersProvider(this);
-		}
-	}
+    /**
+     * 设置指定 load balancer 实现策略.
+     * 
+     * @param loadBalancerRule
+     */
+    public void setLoadBalancerRule(AbstractLoadBalancerRule loadBalancerRule) {
+        this.loadBalancerRule = loadBalancerRule;
+        if (loadBalancerRule.getRSFServersProvider() != this) {
+            loadBalancerRule.setRSFServersProvider(this);
+        }
+    }
 
-	public RSFServer chooseServer() {
-		return this.loadBalancerRule.choose();
-	}
+    public RSFServer chooseServer() {
+        return this.loadBalancerRule.choose();
+    }
 
-	@Override
-	public void addServers(List<RSFServer> newServers) {
-		// do something..
-	}
+    @Override
+    public void addServers(List<RSFServer> newServers) {
+        // do something..
+    }
 
-	@Override
-	public void markServerDown(RSFServer server) {
-		// overview do something...
-	}
+    @Override
+    public void markServerDown(RSFServer server) {
+        // overview do something...
+    }
 
     public String toString() {
         StringBuilder objStr = new StringBuilder();
@@ -65,5 +65,5 @@ public abstract class BaseRSFServersProvider implements RSFServersProvider{
         return objStr.toString();
     }
 
-	public abstract List<RSFServer> getServerList();
+    public abstract List<RSFServer> getServerList();
 }

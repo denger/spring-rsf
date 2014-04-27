@@ -12,21 +12,21 @@ import org.codehaus.jackson.map.module.SimpleModule;
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
 public class JacksonContextResolver implements ContextResolver<ObjectMapper>{
-	
-	private ObjectMapper objectMapper;
-	
-	public JacksonContextResolver(){
-		this.objectMapper = new ObjectMapper();
-		registerDefaultModule();
-	}
+    
+    private ObjectMapper objectMapper;
+    
+    public JacksonContextResolver(){
+        this.objectMapper = new ObjectMapper();
+        registerDefaultModule();
+    }
 
-	@Override
-	public ObjectMapper getContext(Class<?> type) {
-		return this.objectMapper;
-	}
+    @Override
+    public ObjectMapper getContext(Class<?> type) {
+        return this.objectMapper;
+    }
 
-	protected void registerDefaultModule(){
-		SimpleModule module = new SimpleModule("DEFAULT_MODULE", new Version(1, 0, 0, null));
-		objectMapper.registerModule(module);
-	}
+    protected void registerDefaultModule(){
+        SimpleModule module = new SimpleModule("DEFAULT_MODULE", new Version(1, 0, 0, null));
+        objectMapper.registerModule(module);
+    }
 }
