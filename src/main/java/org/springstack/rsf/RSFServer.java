@@ -60,4 +60,8 @@ public class RSFServer {
 	public boolean isAlive() {
 		return isAlive;
 	}
+
+	public String getId() {
+		return server;
+	}
 }

@@ -1,4 +1,4 @@
-package org.springstack.rsf.loadbalancer;
+package org.springstack.rsf.util;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
