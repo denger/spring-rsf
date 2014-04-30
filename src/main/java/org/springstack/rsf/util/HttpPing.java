@@ -23,11 +23,12 @@ public class HttpPing {
      * @param server RSFServer Instance.
      */
     public boolean isAlive(RSFServer server) {
+        HttpURLConnection con = null;
         try {
             HttpURLConnection.setFollowRedirects(false);
             // note : you may also need
             HttpURLConnection.setFollowRedirects(false);
-            HttpURLConnection con = (HttpURLConnection) new URL(String.valueOf(server.getURI()))
+            con = (HttpURLConnection) new URL(String.valueOf(server.getURI()))
                     .openConnection();
             con.setUseCaches(false);
             con.setReadTimeout(DEFAULT_PING_TIMEOUT);
@@ -35,6 +36,8 @@ public class HttpPing {
             return isAlive(con.getResponseCode());
         } catch (Exception e) {
             return false;
+        }finally{
+            if(con != null) con.disconnect();
         }
     }
 
