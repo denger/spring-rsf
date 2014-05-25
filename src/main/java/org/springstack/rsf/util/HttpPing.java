@@ -41,7 +41,7 @@ public class HttpPing {
         }
     }
 
-    private boolean isAlive(int responseCode) {
+    protected boolean isAlive(int responseCode) {
         return (responseCode >= HttpURLConnection.HTTP_OK && responseCode < HttpURLConnection.HTTP_BAD_REQUEST);
     }
 
