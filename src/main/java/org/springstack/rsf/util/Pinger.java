@@ -8,6 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springstack.rsf.RSFServer;
 
+/**
+ * 提供对 Server 健康状态检查的任务。通过 <code>Pinger.createPingTask</code> 来创建对 Server List
+ * 的状态检查的 Task.
+ * 
+ * @author denger
+ * 
+ */
 public class Pinger{
 
     private static Logger logger = LoggerFactory.getLogger(Pinger.class);
@@ -27,8 +34,12 @@ public class Pinger{
     private List<RSFServer> servers;
     protected AtomicBoolean pingInProgress = new AtomicBoolean(false);
 
-    private Pinger(List<RSFServer> servers){
+    protected Pinger(List<RSFServer> servers){
         this.servers = servers;
+    }
+
+    private PingTask createTask() {
+        return new PingTask(this);
     }
 
     protected boolean isPingInProgress() {
@@ -39,11 +50,7 @@ public class Pinger{
         return httpPing;
     }
 
-    private PingTask createTask() {
-        return new PingTask(this);
-    }
-
-    private void runPinger(){
+    protected void runPinger(){
         if(servers == null || servers.size() <= 0){
             return;    // no servers!
         }
